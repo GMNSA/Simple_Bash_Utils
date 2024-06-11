@@ -35,7 +35,12 @@ void add_char(char *str, int n, char c);
 void reboot_step(s_step *step);
 void reboot_do(s_step *step);
 char *handling_arguments(char **argv, int argc, s_step *step);
-void step_a(char *c, char my_var[], unsigned size_my_var, s_step *step);
+// void step_a(char *c, char my_var[], unsigned size_my_var, s_step *step);
+void step_a(s_step *step, char *c, char my_var[], unsigned n_my_var);
+void step_c(s_step *step);
+void step_b(s_step *step, int *is_num, char spec[]);
+void step_f(s_step *step, char *c, char my_var[], unsigned n_my_var);
+
 void display_processing(char c, s_step *step);
 
 #endif // CAT_INCLUDES_S21_CAT_H_

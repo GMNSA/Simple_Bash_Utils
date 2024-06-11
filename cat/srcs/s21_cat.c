@@ -113,7 +113,7 @@ char *handling_arguments(char **argv, int argc, s_step *step) {
 
 // -------------------------------------------------------
 
-void step_a(char *c, char my_var[], unsigned size_my_var, s_step *step) {
+void step_a(s_step *step, char *c, char my_var[], unsigned n_my_var) {
   if (step->do_a) {
     if ((*c < 32 && *c != 10 && *c != 13 && *c != 9) || *c == 127) {
       if (*c == 127) {
@@ -124,7 +124,50 @@ void step_a(char *c, char my_var[], unsigned size_my_var, s_step *step) {
       // int length = strlen(*my_var);
       // snprintf(*my_var + length, sizeof(my_var) - length, "%s", "^");
       // strcat(*my_var, "^");
-      snprintf(my_var, size_my_var, "%s", "^");
+      snprintf(my_var, n_my_var, "%s", "^");
+    }
+  }
+}
+
+// -------------------------------------------------------
+
+void step_c(s_step *step) {
+  if (step->do_c)
+    step->is_short = 1;
+}
+
+// -------------------------------------------------------
+
+void step_b(s_step *step, int *is_num, char spec[]) {
+  if (step->do_b) {
+    if (step->is_short) {
+      if (step->prev == '\n' && step->now != '\n') {
+        ++step->line_num;
+        // strcat(spec, "%6d\t");
+        snprintf(spec, SIZE_VAR, "%s", "%6d\t");
+        *is_num = 1;
+      }
+    } else {
+      if (step->prev == '\n') {
+        if (step->n_empty_line <= 2) {
+          ++step->line_num;
+        }
+        // strcat(spec, "%6d\t");
+        snprintf(spec, SIZE_VAR, "%s", "%6d\t");
+        *is_num = 1;
+      }
+    }
+  }
+}
+
+// -------------------------------------------------------
+
+void step_f(s_step *step, char *c, char my_var[], unsigned n_my_var) {
+  if (step->do_f) {
+    if (*c == '\t') {
+      // strcat(my_var, "^");
+      snprintf(my_var, n_my_var, "%s", "^");
+      *c = 'I';
     }
   }
 }
@@ -139,46 +182,10 @@ void display_processing(char c, s_step *step) {
   step->now = c;
   reboot_do(step);
 
-  step_a(&c, my_var, SIZE_VAR, step);
-
-  // if (step->do_a) {
-  //   if ((c < 32 && c != 10 && c != 13 && c != 9) || c == 127) {
-  //     if (c == 127) {
-  //       c = '?';
-  //     } else {
-  //       c += 64;
-  //     }
-  //     strcat(my_var, "^");
-  //   }
-  // }
-
-  if (step->do_c)
-    step->is_short = 1;
-
-  if (step->do_b) {
-    if (step->is_short) {
-      if (step->prev == '\n' && step->now != '\n') {
-        ++step->line_num;
-        strcat(spec, "%6d\t");
-        is_num = 1;
-      }
-    } else {
-      if (step->prev == '\n') {
-        if (step->n_empty_line <= 2) {
-          ++step->line_num;
-        }
-        strcat(spec, "%6d\t");
-        is_num = 1;
-      }
-    }
-  }
-
-  if (step->do_f) {
-    if (c == '\t') {
-      strcat(my_var, "^");
-      c = 'I';
-    }
-  }
+  step_a(step, &c, my_var, SIZE_VAR);
+  step_c(step);
+  step_b(step, &is_num, spec);
+  step_f(step, &c, my_var, SIZE_VAR);
 
   if (step->do_d) {
     if (step->now == '\n') {
