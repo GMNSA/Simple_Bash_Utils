@@ -1,0 +1,8 @@
+-Wall
+-Werror
+-Wextra
+-std=c17
+--style=Google
+-xc
+-I./cat/includes/
+-I./greap/includes/

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json",
+  "configurations": {
+    "CPP: Run current script": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "_comment": "./a.out",
+        "program": "./a.out",
+        "cwd": "${workspaceRoot}",
+        "args": [ "*${args:--update-gadget-config}" ],
+        "justMyCode#json": "${justMyCode:true}"
+      }
+    }
+  }
+}
