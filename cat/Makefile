@@ -1,25 +1,43 @@
 CC=gcc
-LDFLAGS=-std=c11 -g -Wall -Werror -Wextra
-EXECUTABLE=s21_cat
+LDFLAGS=-std=c17 # -g -Wall -Werror -Wextra
+EXECUTABLE=f_cat
 
-.PHONY: all s21_cat rebuild check clean test
+CC_VERSION := $(shell $(CC) --version | head -n 1 | awk '{print $$3}')
+TARGET_VERSION := 14.1.1
 
-all: s21_cat
-	./s21_cat
+COMPARE_VERSION = $(shell \
+				  if [ "$(CC_VERSION)" = "$(TARGET_VERSION)" ]; then \
+					  echo "OK" \
+				  else \
+					  echo NO; \
+				  fi \
+				  )
 
-s21_cat: ./srcs/main.c ./srcs/s21_cat.c
-	$(CC) $(LDFLAGS) ./srcs/main.c ./srcs/s21_cat.c -o $(EXECUTABLE)
+.PHONY: all f_cat rebuild check clean test check_gcc
 
-rebuild: clean s21_cat
+all: check_gcc f_cat
+	./f_cat
+
+check_gcc:
+	@if [ "$(CC_VERSION)" = "$(TARGET_VERSION)" ]; then \
+		echo "GCC Success"; \
+	else \
+		echo "GCC --version must be $(TARGET_VERSION). \n -- Run Docker    bash run.sh -- "; \
+		exit 1; \
+	fi
+
+f_cat: check_gcc ./srcs/main.c ./srcs/f_cat.c
+	$(CC) $(LDFLAGS) ./srcs/main.c ./srcs/f_cat.c -o $(EXECUTABLE)
+
+rebuild: clean f_cat
 
 check:
-	# python3 ../../materials/linters/cpplint.py --extensions=c includes/*.h srcs/*.c
 	clang-format -n includes/*.h srcs/*.c
 
 clean:
 	rm -f $(EXECUTABLE) CPPLINT.cfg ./tests/log.txt ./log.txt
 
 test: rebuild
-	cp s21_cat ./tests/s21_cat
+	cp f_cat ./tests/f_cat
 	cd ./tests && bash test_cat.sh bytes.txt
-	rm ./tests/s21_cat
+	rm ./tests/f_cat

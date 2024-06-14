@@ -40,10 +40,10 @@ function test1() {
     for var in -b -e -n -s -t -v -E -T --number-nonblank --number --squeeze-blank
     do
         TEST1="$var $TEST_FILE"
-        ./s21_cat $TEST1 > s21_cat.txt
+        ./f_cat $TEST1 > f_cat.txt
         cat $TEST1 > cat.txt
-        DIFF_RES="$(diff -s s21_cat.txt cat.txt)"
-        if [ "$DIFF_RES" == "Files s21_cat.txt and cat.txt are identical" ]
+        DIFF_RES="$(diff -s f_cat.txt cat.txt)"
+        if [ "$DIFF_RES" == "Files f_cat.txt and cat.txt are identical" ]
         then
             # (( COUNTER_SUCCESS++ ))
             echo "SUCCESS" >> $TEST_RESULT
@@ -53,7 +53,7 @@ function test1() {
             echo "FAIL" >> $TEST_RESULT
             echo "$TEST1"
         fi
-        rm s21_cat.txt cat.txt
+        rm f_cat.txt cat.txt
     done
 }
 
@@ -67,10 +67,10 @@ function test2() {
             if [ $var != $var2 ]
             then
                 TEST1="$var $var2 $TEST_FILE"
-                ./s21_cat $TEST1 > s21_cat.txt
+                ./f_cat $TEST1 > f_cat.txt
                 cat $TEST1 > cat.txt
-                DIFF_RES="$(diff -s s21_cat.txt cat.txt)"
-                if [ "$DIFF_RES" == "Files s21_cat.txt and cat.txt are identical" ]
+                DIFF_RES="$(diff -s f_cat.txt cat.txt)"
+                if [ "$DIFF_RES" == "Files f_cat.txt and cat.txt are identical" ]
                 then
                     # (( COUNTER_SUCCESS++ ))
                     echo "SUCCESS" >> $TEST_RESULT
@@ -80,7 +80,7 @@ function test2() {
                     echo "FAIL" >> $TEST_RESULT
                     echo "$TEST1"
                 fi
-                rm s21_cat.txt cat.txt
+                rm f_cat.txt cat.txt
             fi
         done
     done
@@ -98,10 +98,10 @@ function test3() {
                 if [ $var != $var2 ] && [ $var2 != $var3 ] && [ $var != $var3 ]
                 then
                     TEST1="$var $var2 $var3 $TEST_FILE"
-                    ./s21_cat $TEST1 > s21_cat.txt
+                    ./f_cat $TEST1 > f_cat.txt
                     cat $TEST1 > cat.txt
-                    DIFF_RES="$(diff -s s21_cat.txt cat.txt)"
-                    if [ "$DIFF_RES" == "Files s21_cat.txt and cat.txt are identical" ]
+                    DIFF_RES="$(diff -s f_cat.txt cat.txt)"
+                    if [ "$DIFF_RES" == "Files f_cat.txt and cat.txt are identical" ]
                     then
                         # (( COUNTER_SUCCESS++ ))
                         echo "SUCCESS" >> $TEST_RESULT
@@ -111,7 +111,7 @@ function test3() {
                         echo "FAIL" >> $TEST_RESULT
                         echo "$TEST1"
                     fi
-                    rm s21_cat.txt cat.txt
+                    rm f_cat.txt cat.txt
 
                 fi
             done
@@ -133,10 +133,10 @@ function test4() {
                     if [ $var != $var2 ] && [ $var2 != $var3 ] && [ $var != $var3 ] && [ $var != $var4 ] && [ $var2 != $var4 ] && [ $var3 != $var4 ]
                     then
                         TEST1="$var $var2 $var3 $var4 $TEST_FILE"
-                        ./s21_cat $TEST1 > s21_cat.txt
+                        ./f_cat $TEST1 > f_cat.txt
                         cat $TEST1 > cat.txt
-                        DIFF_RES="$(diff -s s21_cat.txt cat.txt)"
-                        if [ "$DIFF_RES" == "Files s21_cat.txt and cat.txt are identical" ]
+                        DIFF_RES="$(diff -s f_cat.txt cat.txt)"
+                        if [ "$DIFF_RES" == "Files f_cat.txt and cat.txt are identical" ]
                         then
                             # (( COUNTER_SUCCESS++ ))
                             echo "SUCCESS" >> $TEST_RESULT
@@ -146,7 +146,7 @@ function test4() {
                             echo "FAIL" >> $TEST_RESULT
                             echo "$TEST1"
                         fi
-                        rm s21_cat.txt cat.txt
+                        rm f_cat.txt cat.txt
 
                     fi
                 done

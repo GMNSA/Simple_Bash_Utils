@@ -1,4 +1,4 @@
-#include "../includes/s21_cat.h"
+#include "../includes/f_cat.h"
 #include <stdio.h>
 
 int main(int argc, char **argv) {

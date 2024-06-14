@@ -1,5 +1,5 @@
-#ifndef CAT_INCLUDES_S21_CAT_H_
-#define CAT_INCLUDES_S21_CAT_H_
+#ifndef CAT_INCLUDES_F_CAT_H_
+#define CAT_INCLUDES_F_CAT_H_
 
 #define SIZE_VAR 9
 #define SIZE_ARRAY 10
@@ -43,4 +43,4 @@ void step_f(s_step *step, char *c, char my_var[], unsigned n_my_var);
 
 void display_processing(char c, s_step *step);
 
-#endif // CAT_INCLUDES_S21_CAT_H_
+#endif // CAT_INCLUDES_F_CAT_H_
