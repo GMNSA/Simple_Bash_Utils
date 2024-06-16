@@ -41,7 +41,7 @@ check:
 	clang-format -n includes/*.h srcs/*.c
 
 clean:
-	rm -f $(EXECUTABLE) CPPLINT.cfg ./tests/log.txt ./log.txt
+	rm -f $(EXECUTABLE) ./tests/log.txt ./log.txt
 
 test: rebuild
 	cp f_cat ./tests/f_cat

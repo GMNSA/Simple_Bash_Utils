@@ -121,9 +121,6 @@ void step_a(s_step *step, char *c, char my_var[], unsigned n_my_var) {
       } else {
         *c += 64;
       }
-      // int length = strlen(*my_var);
-      // snprintf(*my_var + length, sizeof(my_var) - length, "%s", "^");
-      // strcat(*my_var, "^");
       snprintf(my_var, n_my_var, "%s", "^");
     }
   }
@@ -143,7 +140,6 @@ void step_b(s_step *step, int *is_num, char spec[]) {
     if (step->is_short) {
       if (step->prev == '\n' && step->now != '\n') {
         ++step->line_num;
-        // strcat(spec, "%6d\t");
         snprintf(spec, SIZE_VAR, "%s", "%6d\t");
         *is_num = 1;
       }
@@ -152,7 +148,6 @@ void step_b(s_step *step, int *is_num, char spec[]) {
         if (step->n_empty_line <= 2) {
           ++step->line_num;
         }
-        // strcat(spec, "%6d\t");
         snprintf(spec, SIZE_VAR, "%s", "%6d\t");
         *is_num = 1;
       }
@@ -165,7 +160,6 @@ void step_b(s_step *step, int *is_num, char spec[]) {
 void step_f(s_step *step, char *c, char my_var[], unsigned n_my_var) {
   if (step->do_f) {
     if (*c == '\t') {
-      // strcat(my_var, "^");
       snprintf(my_var, n_my_var, "%s", "^");
       *c = 'I';
     }

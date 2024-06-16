@@ -52,10 +52,7 @@ test: rebuild
 	cd ./tests && bash test_grep.sh
 
 clean:
-	rm -f CPPLINT.cfg ./tests/log.txt ./log.txt  \
-		./tests/implementation-tests.o* \
-		./tests/implementation-tests.g*\
-		$(EXECUTABLE)
+	rm -f ./tests/log.txt ./log.txt $(EXECUTABLE)
 	rm -rf ./objects/
 
 objects/%.o: srcs/%.c
