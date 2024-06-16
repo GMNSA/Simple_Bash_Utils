@@ -163,17 +163,17 @@ test1 &
 test_pid=$!
 show_loading_message $test_pid
 
-# test2 &
-# test_pid=$!
-# show_loading_message $test_pid
-#
-# test3 &
-# test_pid=$!
-# show_loading_message $test_pid
-#
-# test4 &
-# test_pid=$!
-# show_loading_message $test_pid
+test2 &
+test_pid=$!
+show_loading_message $test_pid
+
+test3 &
+test_pid=$!
+show_loading_message $test_pid
+
+test4 &
+test_pid=$!
+show_loading_message $test_pid
 
 
 COUNTER_SUCCESS=$(grep -c "SUCCESS" $TEST_RESULT)

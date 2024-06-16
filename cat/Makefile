@@ -1,6 +1,8 @@
 CC=gcc
-LDFLAGS=-std=c17 # -g -Wall -Werror -Wextra
+CFLAGS=-std=c17 # -g -Wall -Werror -Wextra
 EXECUTABLE=f_cat
+
+# -- -------------------------------------------- --
 
 CC_VERSION := $(shell $(CC) --version | head -n 1 | awk '{print $$3}')
 TARGET_VERSION := 14.1.1
@@ -13,7 +15,11 @@ COMPARE_VERSION = $(shell \
 				  fi \
 				  )
 
+# -- -------------------------------------------- --
+
 .PHONY: all f_cat rebuild check clean test check_gcc
+
+# -- -------------------------------------------- --
 
 all: check_gcc f_cat
 	./f_cat
@@ -27,7 +33,7 @@ check_gcc:
 	fi
 
 f_cat: check_gcc ./srcs/main.c ./srcs/f_cat.c
-	$(CC) $(LDFLAGS) ./srcs/main.c ./srcs/f_cat.c -o $(EXECUTABLE)
+	$(CC) $(CFLAGS) ./srcs/main.c ./srcs/f_cat.c -o $(EXECUTABLE)
 
 rebuild: clean f_cat
 
