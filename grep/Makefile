@@ -38,8 +38,7 @@ check_dir_objects:
 rebuild: clean all
 
 check:
-	cp ../../materials/linters/CPPLINT.cfg ./
-	python3 ../../materials/linters/cpplint.py --extensions=c includes/*.h srcs/*.c
+	clang-format -n includes/*.h srcs/*.c
 
 test: rebuild
 	cd ./tests && bash test_grep.sh
