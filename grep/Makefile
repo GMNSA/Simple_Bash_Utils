@@ -11,7 +11,7 @@ HEADERS=./includes
 
 # -- -------------------------------------------- --
 
-.PHONY: all rebuild test check clean check_dir_objects
+.PHONY: all rebuild test check clean check_dir_objects check_gcc
 
 # -- -------------------------------------------- --
 
@@ -28,9 +28,17 @@ COMPARE_VERSION = $(shell \
 
 # -- -------------------------------------------- --
 
-all: check_dir_objects build
+all: check_gcc check_dir_objects build
 
 build: $(EXECUTABLE) $(OBJECTS)
+
+check_gcc:
+	@if [ "$(CC_VERSION)" = "$(TARGET_VERSION)" ]; then \
+		echo "GCC Success"; \
+	else \
+		echo "GCC --version must be $(TARGET_VERSION). \n -- Run Docker    make docker_run -- "; \
+		exit 1; \
+	fi
 
 check_dir_objects:
 	mkdir -p objects

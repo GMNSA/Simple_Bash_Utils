@@ -28,7 +28,7 @@ check_gcc:
 	@if [ "$(CC_VERSION)" = "$(TARGET_VERSION)" ]; then \
 		echo "GCC Success"; \
 	else \
-		echo "GCC --version must be $(TARGET_VERSION). \n -- Run Docker    bash run.sh -- "; \
+		echo "GCC --version must be $(TARGET_VERSION). \n -- Run Docker    make docker_run -- "; \
 		exit 1; \
 	fi
 
