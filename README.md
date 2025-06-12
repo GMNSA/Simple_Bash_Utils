@@ -23,10 +23,10 @@ The `cat` (short for "concatenate") utility is used to read and concatenate file
 ### Usage Example
 
 #### Example 1: Numbering all lines
-cat -n file.txto
+cat -n file.txt
 
 Example 2: Numbering only non-empty lines
-cat -b file.txto
+cat -b file.txt 
 
 Example 3: Squeezing adjacent blank lines
 cat -s file.txt
